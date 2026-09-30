@@ -6,6 +6,7 @@ import {
   Mail,
   type LucideIcon,
 } from "lucide-react";
+import Reveal from "./Reveal";
 
 const socialLinks: Array<{ label: string; href: string; icon: LucideIcon }> = [
   {
@@ -24,7 +25,7 @@ export default function AboutSection() {
       className="mx-auto w-[calc(100%-2rem)] max-w-7xl scroll-mt-24 py-16"
     >
       <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-start">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-blue-300/80">
             About me
           </p>
@@ -44,65 +45,61 @@ export default function AboutSection() {
             My goal is straightforward: build software that is easy to reason
             about today and still pleasant to change six months from now.
           </p>
-
           <div className="mt-8 flex flex-wrap gap-2">
-            {socialLinks.map(({ label, href, icon: Icon }) => {
-              return (
-                <a
-                  key={String(label)}
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3.5 py-2.5 text-xs font-semibold text-slate-300 transition hover:border-blue-200/20 hover:bg-white/6 hover:text-white"
-                >
-                  <Icon size={15} />
-                  {label}
-                  <ArrowUpRight size={13} />
-                </a>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/10 backdrop-blur-2xl">
-          <div className="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-blue-400/10 blur-3xl" />
-
-          <div className="relative flex items-center justify-between border-b border-white/5 pb-4">
-            <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-slate-500">
-              Profile / 2026
-            </span>
-            <BriefcaseBusiness size={17} className="text-blue-300" />
-          </div>
-
-          <div className="relative mt-5 grid gap-4 sm:grid-cols-2">
-            {[
-              ["Focus", "Backend + distributed systems"],
-              ["Education", "Bachelor in Education Technology"],
-              ["University", "Minia University · Egypt"],
-              ["Certifications", "GitHub Foundations · Docker Foundations"],
-            ].map(([label, value]) => (
-              <div
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <a
                 key={label}
-                className="rounded-2xl border border-white/5 bg-black/10 p-4"
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noreferrer" : undefined}
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-3.5 py-2.5 text-xs font-semibold text-slate-300 transition hover:border-blue-200/20 hover:bg-white/6 hover:text-white"
               >
-                <span className="block text-[10px] uppercase tracking-[0.16em] text-slate-600">
-                  {label}
-                </span>
-                <strong className="mt-2 block text-sm leading-6 text-slate-200">
-                  {value}
-                </strong>
-              </div>
+                <Icon size={15} />
+                {label}
+                <ArrowUpRight size={13} />
+              </a>
             ))}
           </div>
+        </Reveal>
 
-          <div className="relative mt-3 rounded-2xl border border-blue-300/10 bg-blue-400/4 p-5">
-            <div className="text-4xl leading-none text-blue-300/70">“</div>
-            <p className="text-sm text-slate-300">
-              Keep the architecture explicit. Keep the interfaces small. Keep
-              learning.
-            </p>
+        <Reveal direction="right" delay={0.12}>
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/10 backdrop-blur-2xl">
+            <div className="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full bg-blue-400/10 blur-3xl" />
+            <div className="relative flex items-center justify-between border-b border-white/5 pb-4">
+              <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-slate-500">
+                Profile / 2026
+              </span>
+              <BriefcaseBusiness size={17} className="text-blue-300" />
+            </div>
+            <div className="relative mt-5 grid gap-4 sm:grid-cols-2">
+              {[
+                ["Focus", "Backend + scalable systems"],
+                ["Education", "Bachelor in Education Technology"],
+                ["University", "Minia University · Egypt"],
+                ["Certifications", "GitHub Foundations · Docker Foundations"],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-white/5 bg-black/10 p-4"
+                >
+                  <span className="block text-[10px] uppercase tracking-[0.16em] text-slate-600">
+                    {label}
+                  </span>
+                  <strong className="mt-2 block text-sm leading-6 text-slate-200">
+                    {value}
+                  </strong>
+                </div>
+              ))}
+            </div>
+            <div className="relative mt-3 rounded-2xl border border-blue-300/10 bg-blue-400/4 p-5">
+              <div className="text-4xl leading-none text-blue-300/70">“</div>
+              <p className="text-sm text-slate-300">
+                Keep the architecture explicit. Keep the interfaces small. Keep
+                learning.
+              </p>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { navItems } from "../data/portfolio";
+import { motion } from "motion/react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +15,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0, y: -16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       className={[
         "fixed inset-x-0 top-0 z-50 mx-auto mt-3 w-[calc(100%-1.5rem)] max-w-7xl rounded-2xl border px-3 py-2 transition duration-300",
         scrolled
@@ -78,6 +83,6 @@ export default function Header() {
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
-    </header>
+    </motion.header>
   );
 }

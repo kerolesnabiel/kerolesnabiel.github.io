@@ -1,4 +1,27 @@
+import { motion } from "motion/react";
 import { skillGroups } from "../data/portfolio";
+import Reveal from "./Reveal";
+import type { Variants } from "motion/react";
+
+const cardContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const cardItem: Variants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function SkillsSection() {
   return (
@@ -6,7 +29,7 @@ export default function SkillsSection() {
       id="stack"
       className="mx-auto w-[calc(100%-2rem)] max-w-7xl scroll-mt-24 py-16"
     >
-      <div className="mx-auto max-w-3xl text-center">
+      <Reveal className="mx-auto max-w-3xl text-center">
         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-blue-300/80">
           Engineering stack
         </p>
@@ -20,12 +43,19 @@ export default function SkillsSection() {
           A practical stack centered around C#, .NET, PostgreSQL/SQL Server,
           messaging, cloud storage and modern frontend tooling.
         </p>
-      </div>
+      </Reveal>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <motion.div
+        className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+        variants={cardContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.12, margin: "0px 0px -80px 0px" }}
+      >
         {skillGroups.map(({ icon: Icon, title, items }) => (
-          <article
+          <motion.article
             key={title}
+            variants={cardItem}
             className="rounded-3xl border border-white/10 bg-white/[0.035] p-5 shadow-xl shadow-black/10 backdrop-blur-2xl transition hover:border-blue-200/15 hover:bg-white/5"
           >
             <div className="grid size-10 place-items-center rounded-xl border border-blue-300/15 bg-blue-400/10 text-blue-200">
@@ -42,9 +72,9 @@ export default function SkillsSection() {
                 </span>
               ))}
             </div>
-          </article>
+          </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
